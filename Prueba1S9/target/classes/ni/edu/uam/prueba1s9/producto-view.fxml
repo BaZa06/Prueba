@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="585.0" prefWidth="569.0" style="-fx-background-color: #CF0CB8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.prueba1s9.controller.ProductoController">
+    <children>
+        <Label layoutX="23.0" layoutY="30.0" text="Registro de productos" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="22.0" layoutY="69.0" prefHeight="12.0" prefWidth="44.0" text="Código:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtCodigo" layoutX="88.0" layoutY="66.0" prefHeight="24.0" prefWidth="167.0" promptText="Ej: P001" style="-fx-background-color: #F2C4EF;">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="23.0" layoutY="102.0" prefHeight="12.0" prefWidth="44.0" text="Precio:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtPrecio" layoutX="89.0" layoutY="99.0" prefHeight="24.0" prefWidth="167.0" promptText="0.00" style="-fx-background-color: #F2C4EF;">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="300.0" layoutY="68.0" prefHeight="18.0" prefWidth="54.0" text="Nombre:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtNombre" layoutX="378.0" layoutY="65.0" prefHeight="24.0" prefWidth="167.0" promptText="Ingrese el nombre del producto" style="-fx-background-color: #F2C4EF;">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="300.0" layoutY="101.0" prefHeight="12.0" prefWidth="44.0" text="Stock:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtStock" layoutX="378.0" layoutY="98.0" prefHeight="24.0" prefWidth="167.0" promptText="0" style="-fx-background-color: #F2C4EF;">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="23.0" layoutY="135.0" prefHeight="18.0" prefWidth="65.0" text="Categoría:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="cmbCategoria" layoutX="88.0" layoutY="131.0" prefHeight="26.0" prefWidth="167.0" promptText="Elija una opción" style="-fx-background-color: #F2C4EF;" />
+        <Button fx:id="btnNuevo" layoutX="18.0" layoutY="165.0" mnemonicParsing="false" onAction="#nuevoProducto" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: #D613A6;" text="Nuevo" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnGuardar" layoutX="91.0" layoutY="165.0" mnemonicParsing="false" onAction="#guardar" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: #D613A6;" text="Guardar" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnActualizar" layoutX="165.0" layoutY="165.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: #D613A6;" text="Actualizar" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnEliminar" layoutX="238.0" layoutY="165.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: #D613A6;" text="Eliminar" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <Separator layoutX="16.0" layoutY="202.0" prefHeight="5.0" prefWidth="534.0" />
+        <Label layoutX="18.0" layoutY="218.0" text="Búsqueda y filtros" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" layoutY="248.0" prefHeight="18.0" prefWidth="115.0" text="Código o nombre:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtBuscar" layoutX="121.0" layoutY="245.0" prefHeight="24.0" prefWidth="167.0" promptText="Buscar..." style="-fx-background-color: #F2C4EF;">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="313.0" layoutY="248.0" prefHeight="18.0" prefWidth="65.0" text="Categoría:" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="cmbCategoriaBus" layoutX="378.0" layoutY="244.0" prefHeight="26.0" prefWidth="167.0" promptText="Elija una opción" style="-fx-background-color: #F2C4EF;" />
+        <CheckBox fx:id="chkProductosExistentes" layoutX="21.0" layoutY="287.0" mnemonicParsing="false" text="Solo productos con existencias" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="14.0" />
+            </font>
+        </CheckBox>
+        <Button fx:id="btnBuscar" layoutX="20.0" layoutY="317.0" mnemonicParsing="false" onAction="#buscarProducto" prefHeight="24.0" prefWidth="96.0" style="-fx-background-color: #D613A6;" text="Buscar" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnLimpiarFiltros" layoutX="126.0" layoutY="317.0" mnemonicParsing="false" onAction="#limpiarFiltros" prefHeight="24.0" prefWidth="96.0" style="-fx-background-color: #D613A6;" text="Limpiar filtros" textFill="#e4e4e4">
+            <font>
+                <Font name="Bernard MT Condensed" size="12.0" />
+            </font>
+        </Button>
+        <TableView fx:id="tblProductos" layoutX="20.0" layoutY="360.0" prefHeight="200.0" prefWidth="533.0" style="-fx-background-color: #EDA1DA;">
+            <columns>
+                <TableColumn fx:id="colCodigo" prefWidth="68.00006103515625" text="Código" />
+                <TableColumn fx:id="colNombre" prefWidth="145.5999755859375" text="Nombre" />
+                <TableColumn fx:id="colCategoria" prefWidth="113.59991455078125" text="Categoría" />
+                <TableColumn fx:id="colPrecio" prefWidth="108.00006103515625" text="Precio" />
+                <TableColumn fx:id="colStock" prefWidth="97.59991455078125" text="Stock" />
+            </columns>
+        </TableView>
+      <Button fx:id="btnrecargar" layoutX="231.0" layoutY="317.0" mnemonicParsing="false" onAction="#recargarDatos" prefHeight="24.0" prefWidth="96.0" style="-fx-background-color: #D613A6;" text="Recargar" textFill="#e4e4e4">
+         <font>
+            <Font name="Bernard MT Condensed" size="12.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
