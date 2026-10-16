@@ -158,62 +158,112 @@ public class ProductoController {
     }
 
     // Actualizar producto seleccionado
+
     @FXML
     private void actualizar() {
+
+        // 1. Obtener el producto seleccionado
         Producto seleccionado =
                 tblProductos.getSelectionModel().getSelectedItem();
 
         if (seleccionado == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Atención",
+            mostrarAlerta(
+                    Alert.AlertType.WARNING,
+                    "Atención",
                     "Sin selección",
-                    "Selecciona un producto antes de actualizar.");
+                    "Selecciona un producto antes de actualizar."
+            );
             return;
         }
 
+        // 2. Validar los campos del formulario
         if (!validarCampos()) {
             return;
         }
 
-
+        // 3. Consulta SQL con seis parámetros
         String sql =
-                "SELECT p.id_producto, p.codigo, p.nombre, " +
-                        "p.categoria, p.precio, p.stock " +
-                        "FROM inventario.producto p " +
-                        "ORDER BY p.codigo ASC";
+                "UPDATE inventario.producto SET " +
+                        "codigo = ?, " +
+                        "nombre = ?, " +
+                        "categoria = ?, " +
+                        "precio = ?, " +
+                        "stock = ? " +
+                        "WHERE id_producto = ?";
 
-        cargarProductos(sql);
-
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection =
+                     DatabaseConnection.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement(sql)) {
 
+            // 4. Asignar los cinco campos editables
             statement.setString(1, txtCodigo.getText().trim());
             statement.setString(2, txtNombre.getText().trim());
             statement.setString(3, cmbCategoria.getValue());
-            statement.setDouble(4, Double.parseDouble(txtPrecio.getText().trim()));
-            statement.setInt(5, Integer.parseInt(txtStock.getText().trim()));
+            statement.setDouble(
+                    4,
+                    Double.parseDouble(txtPrecio.getText().trim())
+            );
+            statement.setInt(
+                    5,
+                    Integer.parseInt(txtStock.getText().trim())
+            );
+
+            // 5. Identificar el producto que se va a modificar
             statement.setInt(6, seleccionado.getIdProducto());
 
+            // 6. Ejecutar la actualización
             int filasAfectadas = statement.executeUpdate();
 
-            if (filasAfectadas > 0) {
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito",
+            if (filasAfectadas == 1) {
+
+                mostrarAlerta(
+                        Alert.AlertType.INFORMATION,
+                        "Éxito",
                         "Producto actualizado",
-                        "El producto ha sido actualizado correctamente.");
+                        "Los datos se actualizaron correctamente."
+                );
 
                 limpiar();
                 actualizarTabla();
+
             } else {
-                mostrarAlerta(Alert.AlertType.WARNING, "Atención",
-                        "Sin cambios",
-                        "No se actualizó ningún producto activo.");
+
+                mostrarAlerta(
+                        Alert.AlertType.WARNING,
+                        "Atención",
+                        "Producto no actualizado",
+                        "El producto ya no existe o no se pudo modificar. "
+                                + "Recarga la tabla."
+                );
+
+                actualizarTabla();
             }
 
         } catch (SQLException ex) {
+
+            System.err.println(
+                    "Error al actualizar producto. SQLState: "
+                            + ex.getSQLState()
+            );
             ex.printStackTrace();
-            mostrarAlerta(Alert.AlertType.ERROR, "Error",
+
+            mostrarAlerta(
+                    Alert.AlertType.ERROR,
+                    "Error",
                     "No se pudo actualizar el producto",
-                    ex.getMessage());
+                    "Verifica los datos y las restricciones de PostgreSQL. "
+                            + "Detalle: " + ex.getMessage()
+            );
+
+        } catch (NumberFormatException ex) {
+
+            mostrarAlerta(
+                    Alert.AlertType.WARNING,
+                    "Validación",
+                    "Valores inválidos",
+                    "Revisa el formato del precio y del stock."
+            );
         }
     }
 
